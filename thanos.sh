@@ -1,5 +1,4 @@
 run_thanos(){
-  export perc=20
   while true; do
     export usage=$(df -h / | egrep -o '[0-9]+%' | head -n 1 | sed "s/%//g")
     if [ "$usage" -ge "$(echo 75)" ] ; then
