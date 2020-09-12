@@ -1,4 +1,5 @@
 run_thanos(){
+  export RUNNING_THANOS=1
   while true; do
     export usage=$(df -h / | egrep -o '[0-9]+%' | head -n 1 | sed "s/%//g")
     if [ "$usage" -ge "$(echo 75)" ] ; then
@@ -15,6 +16,8 @@ run_thanos(){
   done
 }
 
-nohup run_thanos &
+if [ $RUNNING_THANOS ] ; then echo "" ; else
+  nohup run_thanos &
+fi
 
 
